@@ -12,8 +12,8 @@ function createCard(cardData, removeCard) {
   const cardImage = cardElement.querySelector('.card__image');
     if (cardImage) {
       cardImage.src = cardData.link;
-      cardImage.setAttribute('alt', `${cardData.name} + '- картинка'`);
-      //cardImage.alt = cardData.name + '- картинка';
+      //cardImage.setAttribute('alt', `${cardData.name} + '- картинка'`);
+      cardImage.alt = cardData.name + '- картинка';
     } 
   
 
