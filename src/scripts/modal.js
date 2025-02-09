@@ -4,11 +4,6 @@
 //      **  Функция открытия попапа с изображением
 //      **  Экспорт
 
-// DOM-элементы
-const popup = document.querySelector('.popup');
-const imagePopup = document.querySelector('.popup_type_image');
-const popupImage = imagePopup.querySelector('.popup__image');
-const popupCaption = imagePopup.querySelector('.popup__caption');
 
 // Функция открытия модального окна (попапа)
 function openModal(popup) {
@@ -30,19 +25,11 @@ function closeModal(popup) {
 function closeModalOnEscape(event) {
     if (event.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_is-opened');
-        if (openedPopup) {
+        /*if (openedPopup) {
             closeModal(openedPopup);   
-        }
+        }*/
     }
 }
 
-// Функция открытия попапа с изображением
-function openImagePopup(name, link) {
-    popupImage.src = link;
-    popupImage.alt = name;
-    popupCaption.textContent = name;
-    openModal(imagePopup);
-}
-
 // Экспорты функций
-export { openModal, closeModal, openImagePopup };
+export { openModal, closeModal };

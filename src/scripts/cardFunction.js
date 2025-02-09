@@ -1,5 +1,5 @@
 
-import { placesList, createCard, removeCard, toggleLike } from './card';
+import { placesList, createCard, deleteCard, likeCard } from './card';
 import { closeModal } from "./modal";
 
 
@@ -18,7 +18,7 @@ function handleFormSubmitCard (evt) {
     link: newCardLinkInput.value, // Получаем ссылку на изображение без пробелов
   };
 
-  const newCard = createCard(cardData, removeCard, toggleLike); // Создаём новую карточку
+  const newCard = createCard(cardData, deleteCard, likeCard); // Создаём новую карточку
   placesList.prepend(newCard); // Добавляем карточку в начало списка
 
   closeModal(newCardPopup); // Закрываем попап после добавления
