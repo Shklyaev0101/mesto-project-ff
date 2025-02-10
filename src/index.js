@@ -35,6 +35,10 @@ const profileCloseButton = profilePopup.querySelector('.popup__close');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_description');
 
+// Переменные элементов профиля
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+
 // Переменые попапа добавления карточки
 const addCardPopup = document.querySelector('.popup_type_new-card');
 const addCardForm = addCardPopup.querySelector('.popup__form');
@@ -62,8 +66,8 @@ createCards()
 
 //Открытие модального окна
 profileEditButton.addEventListener('click', () => {
-  nameInput.value = document.querySelector('.profile__title').textContent;
-  jobInput.value = document.querySelector('.profile__description').textContent; 
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileDescription.textContent; 
   openModal(profilePopup)});
 
 cardAddButton.addEventListener('click', () => {
@@ -82,31 +86,22 @@ document.querySelectorAll('.popup').forEach((popup)=> {
 });
 
 // Редактирование информации о пользователе
-// Заполняем поля формы текущими значениями
-nameInput.value = document.querySelector('.profile__title').textContent;
-jobInput.value = document.querySelector('.profile__description').textContent; 
-
-// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
-function handleFormSubmit(evt) {
+// Обработчик «отправки» формы профиля, хотя пока она никуда отправляться не будет
+function handleProfileFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
-    // Получите значение полей jobInput и nameInput из свойства value
-    const nameValue = nameInput.value;
-    const jobValue = jobInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    const nameInputElement = document.querySelector('.profile__title');
-    const jobInputElement = document.querySelector('.profile__description');
+    // Вставляем новые значения с помощью textContent
+    profileTitle.textContent = nameInput.value;
+    profileDescription.textContent = jobInput.value;
 
-    // Вставьте новые значения с помощью textContent
-    nameInputElement.textContent = nameValue;
-    jobInputElement.textContent = jobValue;
+    closeModal(profilePopup);
 }
 
-// Прикрепляем обработчик к форме:
+// Прикрепляем обработчик к форме профиля:
 // он будет следить за событием “submit” - «отправка»
-profileForm.addEventListener('submit', handleFormSubmit); 
+profileForm.addEventListener('submit', handleProfileFormSubmit); 
 
-//Прикрепляем обработчик к форме новой карточки
+// Прикрепляем обработчик к форме новой карточки
 addCardForm.addEventListener('submit', handleFormSubmitCard);
 
 export { handleImageClick };
