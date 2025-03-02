@@ -57,14 +57,22 @@
               class="popup__input popup__input_type_name"
               placeholder="Имя"
               required
+              minlength="2"
+              maxlength="40"
             />
+            <span class="popup__error name-error"></span>
+
             <input
               type="text"
               name="description"
               class="popup__input popup__input_type_description"
               placeholder="Занятие"
               required
+              minlength="2"
+              maxlength="200"
             />
+            <span class="popup__error description-error"></span>
+
             <button type="submit" class="button popup__button">
               Сохранить
             </button>
@@ -109,6 +117,7 @@
 
     <script type="module" src="./scripts/card.js"></script>
     <script type="module" src="./scripts/cardFunction.js" defer></script>
+    <script type="module" src="./scripts/validate.js" defer></script>
 
     <template id="card-template">
       <li class="places__item card">

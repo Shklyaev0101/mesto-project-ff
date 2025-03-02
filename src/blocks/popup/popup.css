@@ -24,3 +24,25 @@
   right: 0;
   z-index: 10;
 }
+
+.popup__input_type_error {
+  border-bottom: 2px solid red;
+}
+
+.popup__error {
+  font-size: 12px;
+  color: red;
+  visibility: hidden;
+}
+
+.popup__error_visible {
+  visibility: visible;
+  color: red;
+  font-size: 12px;
+}
+
+.popup__button_disabled {
+  background-color: grey;
+  opacity: 0.5;
+  pointer-events: none;
+}

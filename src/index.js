@@ -14,6 +14,7 @@ import { initialCards } from './scripts/cards';
 import { placesList, createCard, deleteCard, likeCard } from './scripts/card';
 import { openModal, closeModal } from './scripts/modal';
 import { handleFormSubmitCard } from './scripts/cardFunction';
+import { enableValidation } from './scripts/validate.js';
 
 // DOM
 
@@ -103,5 +104,17 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // Прикрепляем обработчик к форме новой карточки
 addCardForm.addEventListener('submit', handleFormSubmitCard);
+
+// Инициализация валидации на всех формах
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+// Запуск валидации
+enableValidation(validationConfig);
 
 export { handleImageClick };
