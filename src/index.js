@@ -14,7 +14,7 @@ import { initialCards } from './scripts/cards';
 import { placesList, createCard, deleteCard, likeCard } from './scripts/card';
 import { openModal, closeModal } from './scripts/modal';
 import { handleFormSubmitCard } from './scripts/cardFunction';
-import { enableValidation } from './scripts/validate.js';
+import { enableValidation, clearValidation } from './scripts/validate.js';
 
 // DOM
 
@@ -69,9 +69,12 @@ createCards()
 profileEditButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent; 
+  
+  clearValidation(profileForm, validationConfig); // Очищаем ошибки перед открытием
   openModal(profilePopup)});
 
 cardAddButton.addEventListener('click', () => {
+  clearValidation(addCardForm, validationConfig); // Очищаем ошибки перед открытием
   openModal(addCardPopup)});
 
 //Закрытие по клику на крестик или фон
@@ -114,7 +117,18 @@ const validationConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 };
+
 // Запуск валидации
 enableValidation(validationConfig);
 
+/*
+// Очищает форму добавления карточки при отправке
+const newPlaceForm = document.querySelector('.popup_type_new-card .popup__form');
+newPlaceForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    clearForm(newPlaceForm, validationConfig);
+});
+*/
+
+// Экспорт
 export { handleImageClick };

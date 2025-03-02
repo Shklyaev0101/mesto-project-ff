@@ -1,6 +1,7 @@
 // Показывает ошибку
 function showInputError(formElement, inputElement, errorMessage, config) {
-    const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
+    const errorElement = formElement.querySelector(`.popup__error.${inputElement.name}-error`);
+    if (!errorElement) return; // Предотвращение ошибки, если элемент не найдет
     inputElement.classList.add(config.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(config.errorClass);
@@ -8,25 +9,36 @@ function showInputError(formElement, inputElement, errorMessage, config) {
 
   // Скрывает ошибку
   function hideInputError(formElement, inputElement, config) {
-    const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
+    const errorElement = formElement.querySelector(`.popup__error.${inputElement.name}-error`);
+    if (!errorElement) return; // Предотвращение ошибки, если элемент не найдет
     inputElement.classList.remove(config.inputErrorClass);
     errorElement.textContent = '';
     errorElement.classList.remove(config.errorClass);
   }
   
-  // Проверка поля
+  // Проверка поля на валидность
   function checkInputValidity(formElement, inputElement, config) {
-  if (inputElement.validity.valueMissing) {
-    // Ошибка, если поле пустое
-    showInputError(formElement, inputElement, "Вы пропустили это поле", config);
+    const value = inputElement.value.trim();
+    const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]{2,30}$/;
+
+    if (inputElement.validity.valueMissing) {
+      showInputError(formElement, inputElement, "Вы пропустили это поле", config);
+  } else if (inputElement.name === "name" || inputElement.name === "place-name") {
+      // Проверка названия по регулярке
+      if (!namePattern.test(value)) {
+          showInputError(formElement, inputElement, "Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы", config);
+      } else {
+          hideInputError(formElement, inputElement, config);
+      }
+  } else if (inputElement.name === "link") {
+      // Проверка URL
+      if (!inputElement.validity.valid) {
+          showInputError(formElement, inputElement, "Введите корректную ссылку", config);
+      } else {
+          hideInputError(formElement, inputElement, config);
+      }
   } else if (inputElement.validity.tooShort) {
-    // Ошибка, если введено менее 2 символов
-    showInputError(
-      formElement,
-      inputElement,
-      `Минимальное количество символов: ${inputElement.minLength}. Длина текста сейчас: ${inputElement.value.length}`,
-      config
-    );
+      showInputError(formElement, inputElement, `Минимальное количество символов: ${inputElement.minLength}. Длина текста сейчас: ${value.length}`, config);
   } else {
     // Если ошибок нет — скрываем ошибку
     hideInputError(formElement, inputElement, config);
@@ -59,7 +71,24 @@ function showInputError(formElement, inputElement, errorMessage, config) {
   
     toggleButtonState(inputList, buttonElement, config);
   }
-  
+/*  
+// Очищает форму и сбрасывает кнопку
+function clearForm(formElement, config) {
+  formElement.reset();
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, config);
+}
+*/
+// Очистка валидации
+function clearValidation(formElement, config) {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+
+  inputList.forEach(inputElement => hideInputError(formElement, inputElement, config));
+  toggleButtonState(inputList, buttonElement, config);
+}
+
   // Запускает валидацию
   function enableValidation(config) {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
@@ -68,4 +97,5 @@ function showInputError(formElement, inputElement, errorMessage, config) {
     });
   }
 
-  export { showInputError, hideInputError, checkInputValidity, toggleButtonState, setEventListeners, enableValidation};
+  //export { showInputError, hideInputError, checkInputValidity, toggleButtonState, setEventListeners, enableValidation, clearForm};
+  export { enableValidation, clearValidation};
