@@ -1,12 +1,12 @@
-@import url('./__description/profile__description.css');
-@import url('./__add-button/profile__add-button.css');
-@import url('./__edit-button/profile__edit-button.css');
-@import url('./__info/profile__info.css');
-@import url('./__title/profile__title.css');
-@import url('./__image/profile__image.css');
+@import url("./__description/profile__description.css");
+@import url("./__add-button/profile__add-button.css");
+@import url("./__edit-button/profile__edit-button.css");
+@import url("./__info/profile__info.css");
+@import url("./__title/profile__title.css");
+@import url("./__image/profile__image.css");
 
 .profile {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   color: #fff;
   display: flex;
   align-items: center;
@@ -19,4 +19,35 @@
     flex-direction: column;
     text-align: center;
   }
+}
+
+.profile__image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__edit-avatar-button {
+  position: absolute;
+  top: 50%; /* Центрируем по вертикали */
+  left: 45%; /* Центрируем по горизонтали */
+  transform: translate(-50%, -50%); /* Исправляем сдвиг на 50% */
+  width: 30px; /* Размер кнопки */
+  height: 30px; /* Размер кнопки */
+  background-image: url("../../images/edit-icon.svg"); /* Путь к иконке */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0; /* Скрыто изначально */
+  pointer-events: none; /* Отключаем взаимодействие с кнопкой, когда она скрыта */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Плавное появление и позиционирование */
+}
+
+.profile__image-container:hover .profile__edit-avatar-button {
+  opacity: 1; /* Кнопка становится видимой */
+  pointer-events: auto; /* Включаем взаимодействие с кнопкой при наведении */
 }

@@ -71,15 +71,7 @@ function showInputError(formElement, inputElement, errorMessage, config) {
   
     toggleButtonState(inputList, buttonElement, config);
   }
-/*  
-// Очищает форму и сбрасывает кнопку
-function clearForm(formElement, config) {
-  formElement.reset();
-  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-  const buttonElement = formElement.querySelector(config.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, config);
-}
-*/
+
 // Очистка валидации
 function clearValidation(formElement, config) {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));

@@ -46,3 +46,15 @@
   opacity: 0.5;
   pointer-events: none;
 }
+
+.popup_type_edit-avatar .popup__content {
+  width: 430px;
+  height: 181px;
+  position: absolute;
+  top: 270px;
+  left: 425px;
+}
+
+.popup__input_type_avatar {
+  width: 100%;
+}
