@@ -10,18 +10,19 @@
 //    ** Экспорты
 
 import "./pages/index.css";
-//import { initialCards } from './scripts/cards';
 import {
   getUserInfo,
   getInitialCards,
   updateUserInfo,
   addNewCard,
   updateLikes,
+  updateAvatar,
 } from "./scripts/api";
 import { createCard, deleteCard, likeCard } from "./scripts/card";
 import { openModal, closeModal } from "./scripts/modal";
 import { handleFormSubmitCard } from "./scripts/cardFunction";
 import { enableValidation, clearValidation } from "./scripts/validate";
+import { renderLoading, handleSubmit } from "./utils/utils";
 
 // DOM
 
@@ -128,7 +129,20 @@ document.querySelectorAll(".popup").forEach((popup) => {
 });
 
 // Редактирование информации о пользователе
-// Обработчик «отправки» формы профиля, хотя пока она никуда отправляться не будет
+function handleProfileFormSubmit(evt) {
+  function makeRequest() {
+    return updateUserInfo(nameInput.value, jobInput.value).then(
+      (updatedUser) => {
+        profileTitle.textContent = updatedUser.name;
+        profileDescription.textContent = updatedUser.about;
+        closeModal(profilePopup);
+      }
+    );
+  }
+  handleSubmit(makeRequest, evt);
+}
+
+/*
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
@@ -153,6 +167,7 @@ function handleProfileFormSubmit(evt) {
       saveButton.disabled = false;
     });
 }
+*/
 
 // Прикрепляем обработчик к форме профиля:
 // он будет следить за событием “submit” - «отправка»

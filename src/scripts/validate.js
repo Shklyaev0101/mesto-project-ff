@@ -119,5 +119,4 @@ function enableValidation(config) {
   });
 }
 
-//export { showInputError, hideInputError, checkInputValidity, toggleButtonState, setEventListeners, enableValidation, clearForm};
 export { enableValidation, clearValidation };

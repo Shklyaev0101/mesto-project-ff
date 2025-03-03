@@ -1,8 +1,9 @@
 import { placesList, createCard, deleteCard, likeCard } from "./card";
 import { closeModal, openModal } from "./modal";
-import { addNewCard, deleteCardFromServer } from "./api";
+import { addNewCard, deleteCardFromServer, updateAvatar } from "./api";
 import { enableValidation } from "./validate";
 import { handleImageClick } from "..";
+//import { renderLoading, handleSubmit } from "../utils/utils";
 
 // Получаем элементы формы и попапа
 const newCardPopup = document.querySelector(".popup_type_new-card"); // Сам попап
@@ -104,7 +105,7 @@ function handleFormSubmitCard(evt) {
 function confirmDeleteCard(cardElement, cardId) {
   cardToDelete = cardElement;
   cardIdToDelete = cardId;
-  openModal(popupDelete);
+  //openModal(popupDelete);
 }
 
 confirmButton.addEventListener("click", () => {

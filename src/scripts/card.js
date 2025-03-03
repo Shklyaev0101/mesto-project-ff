@@ -60,12 +60,6 @@ function createCard(cardData, deleteCard, likeCard, handleImageClick, userId) {
 }
 
 // Функция удаления карточки
-/*
-function deleteCard(evt) {
-  const elementToRemove = evt.target.closest('.places__item');
-  elementToRemove.remove();
-}
-*/
 function deleteCard(cardElement) {
   cardElement.remove();
 }

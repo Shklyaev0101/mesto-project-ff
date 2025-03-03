@@ -1,3 +1,5 @@
+import { checkResponse } from "../utils/checkResponse";
+
 const cohortId = "wff-cohort-32";
 const token = "287a963c-1bee-42c9-a958-8b44005c5278";
 
@@ -13,30 +15,14 @@ const config = {
 const getUserInfo = () => {
   return fetch(`${config.baseURL}/users/me`, {
     headers: config.headers,
-  })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    })
-    .catch((err) => console.log(err));
+  }).then(checkResponse);
 };
 
 // Функция для получения карточек с сервера
 const getInitialCards = () => {
   return fetch(`${config.baseURL}/cards`, {
     headers: config.headers,
-  })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    })
-    .catch((err) => console.log(err));
+  }).then(checkResponse);
 };
 
 // Функция для обновления данных профиля
@@ -48,13 +34,7 @@ const updateUserInfo = (name, about) => {
       name: name,
       about: about,
     }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-  });
+  }).then(checkResponse);
 };
 
 // Функция для добавления новой карточки
@@ -66,13 +46,7 @@ const addNewCard = (name, link) => {
       name: name,
       link: link,
     }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-  });
+  }).then(checkResponse);
 };
 
 // Функция для обновления лайков
@@ -80,9 +54,7 @@ const updateLikes = (cardId, isLiked) => {
   return fetch(`${config.baseURL}/cards/likes/${cardId}`, {
     method: isLiked ? "PUT" : "DELETE", // Добавляем лайк (PUT) или удаляем (DELETE)
     headers: config.headers,
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-  );
+  }).then(checkResponse);
 };
 
 // Функция удаления карточки
@@ -90,9 +62,7 @@ const deleteCardFromServer = (cardId) => {
   return fetch(`${config.baseURL}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-  );
+  }).then(checkResponse);
 };
 
 // Функция для обновления аватара
@@ -101,13 +71,7 @@ const updateAvatar = (avatarUrl) => {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({ avatar: avatarUrl }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-  });
+  }).then(checkResponse);
 };
 
 export {
@@ -117,4 +81,5 @@ export {
   addNewCard,
   updateLikes,
   deleteCardFromServer,
+  updateAvatar,
 };

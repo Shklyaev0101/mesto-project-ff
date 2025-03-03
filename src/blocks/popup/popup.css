@@ -27,18 +27,28 @@
 
 .popup__input_type_error {
   border-bottom: 2px solid red;
+  opacity: 1; /**/
 }
 
 .popup__error {
+  /*
   font-size: 12px;
   color: red;
   visibility: hidden;
+  */
+  display: block; /* Убедимся, что ошибки занимают место */
+  min-height: 14px; /* Резервируем место под ошибку */
+  font-size: 9px;
+  color: red;
+  opacity: 0; /* По умолчанию ошибка скрыта */
+  transition: opacity 0.3s;
 }
 
 .popup__error_visible {
   visibility: visible;
   color: red;
-  font-size: 12px;
+  font-size: 9px;
+  opacity: 1; /**/
 }
 
 .popup__button_disabled {
