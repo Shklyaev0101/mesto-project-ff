@@ -1,12 +1,5 @@
-//  * Функции для работы с карточками проекта
-//     ** Темплейт карточки
-//     ** Функция создания карточки
-//     ** Функция удаления карточки
-//     ** Функция обрабатывающая события лайка
-//     ** Экспорт
-
-import { updateLikes } from "./api";
-import { confirmDeleteCard } from "./cardFunction";
+import { updateLikes, deleteCardFromServer } from "./api";
+//import { confirmDeleteCard, handleImageClick } from "./cardFunction";
 
 // Темплейт карточки
 const cardTemplate = document.querySelector("#card-template").content;
@@ -37,9 +30,13 @@ function createCard(cardData, deleteCard, likeCard, handleImageClick, userId) {
   if (cardData.owner._id !== userId) {
     removeCardButton.remove();
   } else {
-    removeCardButton.addEventListener("click", () =>
-      confirmDeleteCard(cardElement, cardData._id)
-    );
+    removeCardButton.addEventListener("click", () => {
+      deleteCardFromServer(cardData._id)
+        .then(() => {
+          deleteCard(cardElement); // Удаляем только после успешного ответа сервера
+        })
+        .catch((err) => console.log("Ошибка удаления карточки:", err));
+    });
   }
 
   //Обработчики событий
@@ -54,7 +51,7 @@ function createCard(cardData, deleteCard, likeCard, handleImageClick, userId) {
   );
 
   //Обработчик удаления
-  removeCardButton.addEventListener("click", () => deleteCard(cardElement));
+  //removeCardButton.addEventListener("click", () => deleteCard(cardElement));
 
   return cardElement;
 }
