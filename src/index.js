@@ -34,7 +34,8 @@ const popupImageElement = popupImage.querySelector(".popup__image");
 const popupImageCaption = popupImage.querySelector(".popup__caption");
 const popupDelete = document.querySelector(".popup_type_delete");
 const confirmButton = popupDelete.querySelector(".popup__button_confirm");
-const saveButton = avatarForm.querySelector(".popup__button");
+const avatarSaveButton = avatarForm.querySelector(".popup__button");
+const addCardSubmitButton = addCardForm.querySelector(".popup__button");
 const cardName = addCardForm.querySelector(".popup__input_type_card-name");
 const cardLink = addCardForm.querySelector(".popup__input_type_url");
 
@@ -112,8 +113,8 @@ function handleAvatarFormSubmit(evt) {
   const avatarLink = avatarInput.value;
 
   // Меняем текст кнопки на "Сохранение..."
-  saveButton.textContent = "Сохранение...";
-  saveButton.disabled = true; // Отключаем кнопку
+  avatarSaveButton.textContent = "Сохранение...";
+  avatarSaveButton.disabled = true; // Отключаем кнопку
 
   // Отправляем данные аватара на сервер
   updateAvatar(avatarLink)
@@ -124,8 +125,8 @@ function handleAvatarFormSubmit(evt) {
     .catch((err) => console.log(err))
     .finally(() => {
       // Восстанавливаем текст кнопки
-      saveButton.textContent = "Сохранить";
-      saveButton.disabled = false;
+      avatarSaveButton.textContent = "Сохранить";
+      avatarSaveButton.disabled = false;
     });
 }
 avatarForm.addEventListener("submit", handleAvatarFormSubmit);
@@ -138,8 +139,8 @@ function handleFormSubmitCard(evt) {
   const link = cardLink.value;
 
   // Меняем текст кнопки на "Сохранение..."
-  saveButton.textContent = "Сохранение...";
-  saveButton.disabled = true; // Отключаем кнопку
+  addCardSubmitButton.textContent = "Сохранение...";
+  addCardSubmitButton.disabled = true; // Отключаем кнопку
 
   addNewCard(name, link)
     .then((newCardData) => {
@@ -157,8 +158,8 @@ function handleFormSubmitCard(evt) {
     .catch((err) => console.log("Ошибка добавления карточки:", err))
     .finally(() => {
       // Восстанавливаем текст кнопки
-      saveButton.textContent = "Создать";
-      saveButton.disabled = false;
+      addCardSubmitButton.textContent = "Создать";
+      addCardSubmitButton.disabled = false;
     });
 }
 addCardForm.addEventListener("submit", handleFormSubmitCard);
